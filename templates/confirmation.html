@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | CloudBus</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101d36, #183e65, #087e8b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            padding: 35px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #13865c;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .ticket {
+            background: #f3f7fb;
+            border: 1px dashed #9aafc2;
+            border-radius: 12px;
+            padding: 22px;
+            text-align: left;
+            margin-bottom: 22px;
+        }
+
+        .ticket h3 {
+            color: #183e65;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 12px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .detail strong {
+            color: #183e65;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .ticket-code {
+            background: #e3f2fd;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .ticket-code p {
+            color: #555;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .ticket-code strong {
+            color: #075985;
+            overflow-wrap: anywhere;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: block;
+            padding: 13px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .primary {
+            background: #087e8b;
+            color: white;
+        }
+
+        .secondary {
+            background: #183e65;
+            color: white;
+        }
+
+        .back {
+            color: #183e65;
+            background: #e9eef4;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="success-icon">✅</div>
+
+    <h1>Booking Confirmed!</h1>
+
+    <p class="subtitle">
+        Your bus ticket has been successfully booked.
+    </p>
+
+    <div class="ticket">
+
+        <h3>🚌 CloudBus E-Ticket</h3>
+
+        <div class="detail">
+            <span>Booking ID</span>
+            <strong>#{{ booking_id }}</strong>
+        </div>
+
+        <div class="detail">
+            <span>From</span>
+            <strong>{{ source }}</strong>
+        </div>
+
+        <div class="detail">
+            <span>To</span>
+            <strong>{{ destination }}</strong>
+        </div>
+
+        <div class="detail">
+            <span>Travel Date</span>
+            <strong>{{ travel_date }}</strong>
+        </div>
+
+        <div class="detail">
+            <span>Seats</span>
+            <strong>{{ seats }}</strong>
+        </div>
+
+        <div class="detail">
+            <span>Fare per Seat</span>
+            <strong>₹{{ fare_per_seat }}</strong>
+        </div>
+
+        <div class="detail">
+            <span>Total Amount</span>
+            <strong>₹{{ total_fare }}</strong>
+        </div>
+
+        <div class="ticket-code">
+            <p>SECURE TICKET REFERENCE</p>
+            <strong>{{ ticket_code }}</strong>
+        </div>
+
+    </div>
+
+    <div class="buttons">
+
+        <a href="{{ url_for('download_ticket', booking_id=booking_id) }}"
+           class="btn primary">
+            Download PDF Ticket
+        </a>
+
+        <a href="{{ url_for('verify_ticket', ticket_code=ticket_code) }}"
+           class="btn secondary">
+            Verify Ticket
+        </a>
+
+        <a href="{{ url_for('my_bookings') }}"
+           class="btn back">
+            My Bookings
+        </a>
+
+        <a href="{{ url_for('dashboard') }}"
+           class="btn back">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

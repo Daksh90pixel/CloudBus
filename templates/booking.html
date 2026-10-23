@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bus Ticket | CloudBus</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+            background: linear-gradient(120deg, #14213d, #087e8b);
+        }
+
+        .booking-card {
+            width: 100%;
+            max-width: 570px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #17446b;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 28px;
+            font-size: 17px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #222;
+            font-size: 16px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 16px;
+            background: white;
+            outline: none;
+        }
+
+        select:focus, input:focus {
+            border-color: #087e8b;
+            box-shadow: 0 0 5px rgba(8, 126, 139, 0.3);
+        }
+
+        button, .back-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 9px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .submit-btn {
+            background: #07838d;
+            color: white;
+            margin-top: 5px;
+        }
+
+        .submit-btn:hover {
+            background: #066b75;
+        }
+
+        .submit-btn:disabled {
+            background: #777;
+            cursor: not-allowed;
+        }
+
+        .back-btn {
+            background: #e9eef5;
+            color: #17446b;
+            margin-top: 13px;
+        }
+
+        .back-btn:hover {
+            background: #dce5ef;
+        }
+
+        @media (max-width: 500px) {
+            .booking-card {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="booking-card">
+
+        <h1>🚌 Book Your Ticket</h1>
+
+        <p class="subtitle">
+            Travel comfortably with CloudBus
+        </p>
+
+        <form method="POST"
+              action="{{ url_for('booking') }}"
+              id="bookingForm">
+
+            <!-- Duplicate booking protection token -->
+            <input
+                type="hidden"
+                name="request_token"
+                value="{{ request_token }}"
+            >
+
+            <div class="form-group">
+                <label for="source">Source</label>
+
+                <select name="source" id="source" required>
+                    <option value="">Select Source</option>
+                    <option value="Airoli">Airoli</option>
+                    <option value="Thane">Thane</option>
+                    <option value="Vashi">Vashi</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="destination">Destination</label>
+
+                <select name="destination" id="destination" required>
+                    <option value="">Select Destination</option>
+                    <option value="Airoli">Airoli</option>
+                    <option value="Thane">Thane</option>
+                    <option value="Vashi">Vashi</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="travel_date">Travel Date</label>
+
+                <input
+                    type="date"
+                    name="travel_date"
+                    id="travel_date"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="seats">Number of Seats</label>
+
+                <select name="seats" id="seats" required>
+                    <option value="">Select Seats</option>
+                    <option value="1">1 Seat</option>
+                    <option value="2">2 Seats</option>
+                    <option value="3">3 Seats</option>
+                    <option value="4">4 Seats</option>
+                    <option value="5">5 Seats</option>
+                    <option value="6">6 Seats</option>
+                </select>
+            </div>
+
+            <button type="submit"
+                    class="submit-btn"
+                    id="submitBtn">
+                Confirm Booking
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('dashboard') }}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+    <script>
+        // Prevent selecting a past date
+        const dateInput = document.getElementById("travel_date");
+
+        const today = new Date();
+
+        const localToday = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split("T")[0];
+
+        dateInput.min = localToday;
+
+        // Prevent accidental double submission
+        const bookingForm = document.getElementById("bookingForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        bookingForm.addEventListener("submit", function () {
+
+            if (!bookingForm.checkValidity()) {
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processing Booking...";
+        });
+    </script>
+
+</body>
+</html>

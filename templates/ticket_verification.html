@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ticket Verification | CloudBus</title>
+</head>
+
+<body>
+
+    <main>
+
+        <h1>CloudBus Ticket Verification</h1>
+
+        {% if valid %}
+
+            <h2>VALID TICKET</h2>
+
+            <p>This ticket is genuine and currently confirmed.</p>
+
+        {% elif booking %}
+
+            <h2>CANCELLED TICKET</h2>
+
+            <p>This ticket is no longer valid for travel.</p>
+
+        {% else %}
+
+            <h2>INVALID TICKET</h2>
+
+            <p>No ticket was found with this reference.</p>
+
+        {% endif %}
+
+
+        {% if booking %}
+
+            <h3>Ticket Details</h3>
+
+            <p>
+                <strong>Ticket Reference:</strong>
+                {{ booking.ticket_code }}
+            </p>
+
+            <p>
+                <strong>From:</strong>
+                {{ booking.source }}
+            </p>
+
+            <p>
+                <strong>Destination:</strong>
+                {{ booking.destination }}
+            </p>
+
+            <p>
+                <strong>Travel Date:</strong>
+                {{ booking.travel_date }}
+            </p>
+
+            <p>
+                <strong>Seats:</strong>
+                {{ booking.seats }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ booking.status }}
+            </p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/">Back to Home</a>
+
+    </main>
+
+</body>
+
+</html>

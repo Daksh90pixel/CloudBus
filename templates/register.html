@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | CloudBus</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background: #f3f6fc;
+        }
+
+        .left-section {
+            width: 55%;
+            min-height: 100vh;
+            padding: 55px 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+
+            background:
+                linear-gradient(rgba(7, 25, 55, 0.82),
+                rgba(7, 25, 55, 0.88)),
+                url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1400&q=85');
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .brand span {
+            color: #72a6ff;
+        }
+
+        .welcome {
+            max-width: 550px;
+        }
+
+        .welcome h1 {
+            font-size: 46px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .welcome p {
+            color: #dbeafe;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .benefits {
+            margin-top: 30px;
+        }
+
+        .benefits p {
+            margin: 15px 0;
+            font-size: 14px;
+            color: #e2eaff;
+        }
+
+        .left-footer {
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .right-section {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 440px;
+            background: white;
+            padding: 40px 38px;
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(20, 43, 80, 0.09);
+            animation: appear 0.7s ease;
+        }
+
+        .register-card h2 {
+            font-size: 29px;
+            color: #142b50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #8491a5;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        label {
+            display: block;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 9px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #246bfe;
+            box-shadow: 0 0 0 3px rgba(36, 107, 254, 0.1);
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(120deg, #155eef, #3478ff);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(21, 94, 239, 0.25);
+        }
+
+        .login-link {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .login-link a {
+            color: #155eef;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .error-message {
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #fff0f0;
+            border: 1px solid #ffd0d0;
+            color: #c62828;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width: 850px) {
+            .left-section {
+                display: none;
+            }
+
+            .right-section {
+                width: 100%;
+                min-height: 100vh;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="left-section">
+
+        <div class="brand">
+            🚌 Cloud<span>Bus</span>
+        </div>
+
+        <div class="welcome">
+
+            <h1>Start Your Journey With CloudBus.</h1>
+
+            <p>
+                Create your account and experience a smarter
+                way to book and manage your bus journeys.
+                Your next destination is just a few clicks away.
+            </p>
+
+            <div class="benefits">
+                <p>✓ Easy online ticket booking</p>
+                <p>✓ Secure booking management</p>
+                <p>✓ Digital tickets anytime</p>
+                <p>✓ Convenient travel experience</p>
+            </div>
+
+        </div>
+
+        <div class="left-footer">
+            © 2026 CloudBus. Smart • Secure • Scalable.
+        </div>
+
+    </section>
+
+
+    <section class="right-section">
+
+        <div class="register-card">
+
+            <h2>Create Account</h2>
+
+            <p class="subtitle">
+                Join CloudBus and book your journey.
+            </p>
+
+            {% if error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST" action="/register">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create a password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="register-button">
+                    Create My Account →
+                </button>
+
+            </form>
+
+            <div class="login-link">
+                Already have an account?
+                <a href="/login">Sign In</a>
+            </div>
+
+            <a href="/" class="home-link">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

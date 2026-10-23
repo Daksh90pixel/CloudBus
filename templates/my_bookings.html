@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | CloudBus</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef4ff, #f8faff);
+            color: #172554;
+            min-height: 100vh;
+        }
+
+        nav {
+            height: 75px;
+            background: white;
+            padding: 0 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 20px rgba(15, 23, 42, 0.06);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .header {
+            max-width: 1100px;
+            margin: 45px auto 25px;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px 60px;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.07);
+            border: 1px solid #edf2fb;
+            transition: 0.3s;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .booking-id {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .confirmed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .cancelled {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .route {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .location h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .location span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .route-line {
+            flex: 1;
+            text-align: center;
+            color: #2563eb;
+            font-size: 22px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 22px 0;
+        }
+
+        .detail-label {
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #edf2f7;
+            padding-top: 20px;
+            gap: 15px;
+        }
+
+        .amount {
+            font-size: 23px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn, .cancel-btn {
+            padding: 10px 16px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .cancel-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .empty {
+            background: white;
+            border-radius: 18px;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.07);
+        }
+
+        .empty h2 {
+            margin-bottom: 12px;
+        }
+
+        .empty p {
+            color: #64748b;
+            margin-bottom: 22px;
+        }
+
+        .book-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        @media(max-width: 650px) {
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .route {
+                gap: 8px;
+            }
+
+            .location h2 {
+                font-size: 17px;
+            }
+
+            .details {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .bottom-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .top-row {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">CloudBus</div>
+    <a href="/dashboard" class="back-btn">← Dashboard</a>
+</nav>
+
+<div class="header">
+    <h1>My Bookings 🎫</h1>
+    <p>View your journeys, download tickets and manage your reservations.</p>
+</div>
+
+<div class="container">
+
+    {% if bookings %}
+
+        {% for booking in bookings %}
+
+        <div class="booking-card">
+
+            <div class="top-row">
+                <div class="booking-id">
+                    BOOKING ID #{{ booking.id }}
+                </div>
+
+                {% if booking.status == 'Confirmed' %}
+                    <span class="status confirmed">● CONFIRMED</span>
+                {% else %}
+                    <span class="status cancelled">● CANCELLED</span>
+                {% endif %}
+            </div>
+
+            <div class="route">
+                <div class="location">
+                    <h2>{{ booking.source }}</h2>
+                    <span>Starting Point</span>
+                </div>
+
+                <div class="route-line">━━━━ ✈ ━━━━</div>
+
+                <div class="location">
+                    <h2>{{ booking.destination }}</h2>
+                    <span>Destination</span>
+                </div>
+            </div>
+
+            <div class="details">
+                <div>
+                    <div class="detail-label">TRAVEL DATE</div>
+                    <div class="detail-value">{{ booking.travel_date }}</div>
+                </div>
+
+                <div>
+                    <div class="detail-label">SEATS</div>
+                    <div class="detail-value">{{ booking.seats }}</div>
+                </div>
+
+                <div>
+                    <div class="detail-label">BOOKING STATUS</div>
+                    <div class="detail-value">{{ booking.status }}</div>
+                </div>
+            </div>
+
+            <div class="bottom-row">
+
+                <div>
+                    <div class="detail-label">TOTAL AMOUNT</div>
+                    <div class="amount">₹{{ booking.total_fare or 0 }}</div>
+                </div>
+
+                <div class="actions">
+
+                    {% if booking.status == 'Confirmed' %}
+                        <a href="/download_ticket/{{ booking.id }}" class="download-btn">
+                            ↓ Download Ticket
+                        </a>
+
+                        <form action="/cancel_booking/{{ booking.id }}" method="POST"
+                              onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                            <button type="submit" class="cancel-btn">
+                                Cancel Booking
+                            </button>
+                        </form>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            <h2>No Bookings Yet</h2>
+            <p>You haven't booked any journeys. Start planning your next trip!</p>
+            <a href="/booking" class="book-btn">Book Your Journey →</a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CloudBus | Smart Bus Booking</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f8fd;
+            color: #172b4d;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 80px;
+            padding: 0 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.04);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            color: #155eef;
+        }
+
+        .logo span {
+            color: #142b50;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #155eef;
+        }
+
+        .login-btn {
+            padding: 11px 22px;
+            border: 1px solid #155eef;
+            border-radius: 8px;
+            color: #155eef !important;
+        }
+
+        .register-btn {
+            padding: 12px 23px;
+            border-radius: 8px;
+            background: #155eef;
+            color: white !important;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            min-height: 590px;
+            padding: 100px 8%;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg,
+                rgba(8, 28, 61, 0.96),
+                rgba(8, 28, 61, 0.72),
+                rgba(8, 28, 61, 0.20)),
+                url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1800&q=85');
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            color: white;
+            animation: fadeIn 1s ease;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 9px 16px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.18;
+            font-weight: 800;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #70a5ff;
+        }
+
+        .hero p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #dbeafe;
+            margin-bottom: 32px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 16px 28px;
+            border-radius: 9px;
+            background: #246bfe;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #084bc9;
+            transform: translateY(-3px);
+        }
+
+        .secondary-btn {
+            display: inline-block;
+            margin-left: 12px;
+            padding: 15px 27px;
+            border: 1px solid white;
+            border-radius: 9px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* FEATURES */
+
+        .features {
+            padding: 85px 8%;
+            text-align: center;
+        }
+
+        .section-tag {
+            color: #155eef;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .features h2 {
+            font-size: 34px;
+            margin: 15px 0;
+            color: #142b50;
+        }
+
+        .section-description {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 45px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(20,43,80,0.06);
+            transition: 0.3s;
+            border: 1px solid #edf1f7;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(20,43,80,0.12);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eaf1ff;
+            border-radius: 15px;
+            font-size: 27px;
+        }
+
+        .feature-card h3 {
+            margin: 22px 0 12px;
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin: 20px 8% 80px;
+            padding: 55px 30px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(120deg, #123b70, #246bfe);
+            border-radius: 18px;
+        }
+
+        .cta h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #dbeafe;
+            margin-bottom: 25px;
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 14px 27px;
+            border-radius: 8px;
+            background: white;
+            color: #155eef;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #0c1e38;
+            color: #cbd5e1;
+            padding: 35px 8%;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 768px) {
+
+            .navbar {
+                padding: 15px 5%;
+                height: auto;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                padding: 80px 7%;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features h2 {
+                font-size: 27px;
+            }
+
+            .secondary-btn {
+                margin: 12px 0 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🚌 Cloud<span>Bus</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="#features">Features</a>
+
+            <a href="/login" class="login-btn">Login</a>
+
+            <a href="/register" class="register-btn">Get Started</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                ✦ SMART & SECURE BUS BOOKING
+            </div>
+
+            <h1>
+                Your Journey,<br>
+                Our <span>Responsibility.</span>
+            </h1>
+
+            <p>
+                Experience smarter bus booking with CloudBus.
+                Book your tickets online, manage your journeys
+                and access your digital tickets anytime, anywhere.
+            </p>
+
+            <a href="/register" class="hero-btn">
+                Book Your Journey →
+            </a>
+
+            <a href="/login" class="secondary-btn">
+                Login to Account
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES SECTION -->
+
+    <section class="features" id="features">
+
+        <div class="section-tag">WHY CLOUDBUS?</div>
+
+        <h2>Travel Smarter With Us</h2>
+
+        <p class="section-description">
+            Everything you need for a simple and reliable booking experience.
+        </p>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="icon">🎫</div>
+
+                <h3>Easy Online Booking</h3>
+
+                <p>
+                    Book your bus tickets online with a simple
+                    and convenient booking process.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">🔒</div>
+
+                <h3>Secure Bookings</h3>
+
+                <p>
+                    Your booking information is stored securely
+                    and protected from unauthorized access.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">☁️</div>
+
+                <h3>Cloud-Based Platform</h3>
+
+                <p>
+                    Designed for scalability and reliable
+                    access through cloud infrastructure.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA SECTION -->
+
+    <section class="cta">
+
+        <h2>Ready for Your Next Journey?</h2>
+
+        <p>
+            Create your CloudBus account and start booking today.
+        </p>
+
+        <a href="/register">
+            Get Started Now →
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 <strong>CloudBus</strong>.
+            All Rights Reserved.
+        </p>
+
+        <p style="margin-top:10px;">
+            Smart • Secure • Scalable
+        </p>
+
+    </footer>
+
+</body>
+</html>

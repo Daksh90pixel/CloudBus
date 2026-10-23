@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | CloudBus</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fc;
+            color: #172b4d;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 255px;
+            background: #10294d;
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            margin: 0 10px 45px;
+        }
+
+        .logo span {
+            color: #70a5ff;
+        }
+
+        .menu-title {
+            color: #8da6c9;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin: 15px 12px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 14px 15px;
+            margin: 6px 0;
+            border-radius: 9px;
+            color: #dbeafe;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #246bfe;
+            color: white;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        /* MAIN CONTENT */
+
+        .main {
+            margin-left: 255px;
+            width: calc(100% - 255px);
+            padding: 35px 45px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .topbar h2 {
+            font-size: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e7efff;
+            color: #155eef;
+            font-weight: 800;
+        }
+
+        .user-info small {
+            color: #8491a5;
+        }
+
+        /* WELCOME BANNER */
+
+        .welcome-banner {
+            padding: 40px;
+            border-radius: 17px;
+            color: white;
+            margin-bottom: 30px;
+            background:
+                linear-gradient(110deg, #123b70, #246bfe);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .welcome-banner p {
+            color: #dbeafe;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .welcome-banner a {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 13px 22px;
+            background: white;
+            color: #155eef;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 13px;
+            border: 1px solid #edf1f7;
+            box-shadow: 0 4px 15px rgba(20,43,80,0.04);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            background: #eaf1ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            font-size: 21px;
+            margin-bottom: 17px;
+        }
+
+        .stat-card h3 {
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .stat-card p {
+            color: #8491a5;
+            font-size: 13px;
+        }
+
+        /* QUICK ACTIONS */
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 20px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 14px;
+            padding: 27px;
+            border: 1px solid #edf1f7;
+            transition: 0.3s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(20,43,80,0.08);
+        }
+
+        .action-card .icon {
+            font-size: 30px;
+            margin-bottom: 17px;
+        }
+
+        .action-card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .action-card p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #8491a5;
+            margin-bottom: 20px;
+        }
+
+        .action-card a {
+            color: #155eef;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 45px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+                padding: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 650px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .sidebar-bottom {
+                margin-top: 20px;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            🚌 Cloud<span>Bus</span>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav class="menu">
+
+            <a href="/dashboard" class="active">▦ &nbsp; Dashboard</a>
+
+            <a href="/booking">🎫 &nbsp; Book Tickets</a>
+
+            <a href="/my_bookings">📋 &nbsp; My Bookings</a>
+
+            {% if session.get('role') == 'admin' %}
+                <a href="/admin">⚙ &nbsp; Admin Panel</a>
+            {% endif %}
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="menu-title">ACCOUNT</div>
+
+            <nav class="menu">
+                <a href="/logout">↪ &nbsp; Logout</a>
+            </nav>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <h2>Dashboard</h2>
+                <p style="color:#8491a5; font-size:13px; margin-top:7px;">
+                    Manage your travel activities.
+                </p>
+            </div>
+
+            <div class="user-info">
+
+                <div class="avatar">
+                    {{ session.get('username', 'U')[0]|upper }}
+                </div>
+
+                <div>
+                    <strong>{{ session.get('username', 'User') }}</strong>
+                    <br>
+                    <small>
+                        {{ session.get('role', 'user')|capitalize }} Account
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome-banner">
+
+            <h1>
+                Welcome back, {{ session.get('username', 'User') }}! 👋
+            </h1>
+
+            <p>
+                Ready for your next journey?
+                Book your tickets and manage your travel
+                conveniently with CloudBus.
+            </p>
+
+            <a href="/booking">
+                Book Your Journey →
+            </a>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🎫</div>
+
+                <h3>{{ total_bookings|default(0) }}</h3>
+
+                <p>Total Bookings</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">✓</div>
+
+                <h3>{{ confirmed_bookings|default(0) }}</h3>
+
+                <p>Confirmed Bookings</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">₹</div>
+
+                <h3>₹{{ total_spent|default(0) }}</h3>
+
+                <p>Total Amount Spent</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="section-heading">
+            <h2>Quick Actions</h2>
+        </div>
+
+        <section class="actions">
+
+            <div class="action-card">
+
+                <div class="icon">🚌</div>
+
+                <h3>Book a Ticket</h3>
+
+                <p>
+                    Choose your route, select your travel date
+                    and book your bus ticket.
+                </p>
+
+                <a href="/booking">
+                    Start Booking →
+                </a>
+
+            </div>
+
+
+            <div class="action-card">
+
+                <div class="icon">📋</div>
+
+                <h3>My Bookings</h3>
+
+                <p>
+                    View your previous bookings, check ticket
+                    status and download your tickets.
+                </p>
+
+                <a href="/my_bookings">
+                    View Bookings →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            © 2026 CloudBus. Smart • Secure • Scalable.
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
